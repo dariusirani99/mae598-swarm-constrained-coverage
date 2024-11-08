@@ -1,7 +1,7 @@
 %% Get Boundary Function
 % Gets the boundary input from the user
 % User draws a floorplan - REQUIRES IMAGE PROCESSING TOOLBOX
-function [boundaryX, boundaryY, obstacleCenters, obstacleRadii] = get_boundary()
+function [boundaryX, boundaryY, obstacleCenters, obstacleRadii, patrolX, patrolY] = get_boundary()
     figure;
     axis([-50 50 -50 50]); % Set axis limits for -50(meters) to 50(meters)
     title('Draw the boundary for the workspace');
@@ -45,5 +45,13 @@ function [boundaryX, boundaryY, obstacleCenters, obstacleRadii] = get_boundary()
         % Lock circle interaction to prevent further modification
         h_circle.InteractionsAllowed = 'none';
     end
-    close()
+    % Define patrol region
+    disp('Please draw the patrol region of the robots:');
+    h_patrol = drawpolygon('Color', 'g', 'LineWidth', 2); % User-defined patrol region
+    patrolPoints = h_patrol.Position; % Stores patrol region points
+    patrolX = patrolPoints(:,1);
+    patrolY = patrolPoints(:,2);
+    plot(patrolX, patrolY, 'g-', 'LineWidth', 2);
+    hold off;
+    close();
 end

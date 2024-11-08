@@ -7,11 +7,9 @@ clc; clear all;
 numRobots = input('Enter the number of robots: ');
 
 % gets user specified boundary coordinates from function
-[boundaryX, boundaryY, obstacleCenters, obstacleRadii, patrolX, patrolY] = get_boundary();
+[boundaryX, boundaryY, obstacleCenters, obstacleRadii] = get_boundary();
 boundaryX = [boundaryX; boundaryX(1)];
 boundaryY = [boundaryY; boundaryY(1)];
-patrolX = [patrolX; patrolX(1)];
-patrolY = [patrolY; patrolY(1)];
 
 % initialize random robot position in the room
 robot_positions = get_robot_positions(boundaryX, boundaryY, obstacleCenters, obstacleRadii, numRobots);
@@ -19,12 +17,16 @@ robot_positions = get_robot_positions(boundaryX, boundaryY, obstacleCenters, obs
 % plot the inititial setup
 plot_initial_setup(boundaryX, boundaryY, obstacleCenters, obstacleRadii, robot_positions);
 
-%% Defining Functions
+% Define grid over workspace
 x = linspace(min(boundaryX), max(boundaryX), 200);
 y = linspace(min(boundaryY), max(boundaryY), 200);
 [X, Y] = meshgrid(x, y);
 
-% Obstacle Repulsive Field
+%% Defining Functions
+% defining variables
+kappa = 3.5;
+
+% Define obstacle function
 beta_sphere = struct([]);
 for i = 1:length(obstacleRadii)
     % Obstacle repulsion field for each obstacle
@@ -37,23 +39,13 @@ for i = 1:length(beta_sphere)
     beta_prod = beta_prod .* beta_sphere(i).obsfn;
 end
 
-% Patrol Region Attractive Field
-patrol_center = mean([patrolX, patrolY]);
-gamma = (x-patrol_center(1)).^2 + (y-patrol_center(2)).^2;
+% defining navigation function
+% Define navigation function parameters
+qd = [0, 0]; % Set goal point or central point (can be adjusted)
+kappa = 3.5; % Controls the sharpness of the boundary approach
 
-% Function to calculate the euclidean norm distance
-distance_to_boundary = @(x, y) min(sqrt((x - X).^2 + (y - Y).^2));
-gamma_grid = arrayfun(distance_to_boundary, X, Y).^2;
+% Compute distance-to-goal function (gamma)
+gamma = (X - qd(1)).^2 + (Y - qd(2)).^2;
 
-% Navigation function based only on obstacle repulsion
-kappa = 3.5; % Controls sharpness
+% Construct the navigation function (combines attractive and repulsive fields)
 nav = gamma ./ (gamma.^kappa + beta_prod) .^ (1/kappa);
-
-
-% Compute the gradients of the navigation function
-[nav_dx, nav_dy] = gradient(nav, x(2) - x(1), y(2) - y(1));
-
-% running simulation
-run_simulation(10000, robot_positions, nav_dx, nav_dy, x, y, patrolX, patrolY, boundaryX, boundaryY, obstacleCenters, obstacleRadii)
-
-
