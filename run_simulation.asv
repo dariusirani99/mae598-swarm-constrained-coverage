@@ -33,13 +33,15 @@ function run_simulation(time_steps, robot_positions, nav_dx, nav_dy, x, y, bound
             yPos = robot_positions(i, 2);
 
             % Boundary reflection
-            if abs(min(sqrt((boundaryX - xPos).^2 + (boundaryY - yPos).^2))) < sensing_radius
+            if abs(min(sqrt((boundaryX - xPos).^2 + (boundaryY - yPos).^2)) < sensing_radius
                 [xPos, yPos, direction_angles(i)] = apply_boundary_reflection(xPos, yPos, boundaryX, boundaryY, sensing_radius, direction_angles(i));
             end
             % Random movement
             dx = cos(direction_angles(i)) * base_speed;
             dy = sin(direction_angles(i)) * base_speed;
             
+            direction_angles
+            direction_angles(i)
 
             % Apply obstacle avoidance
             [repulsive_dx, repulsive_dy] = compute_obstacle_repulsion(xPos, yPos, nav_dx, nav_dy, x, y);
