@@ -3,10 +3,8 @@
 % Plot the initial setup
 function plot_initial_setup(boundaryX, boundaryY, knownObstacleCenters, knownObstacleRadii, unknownObstacleCenters, unknownObstacleRadii, robotPositions)
     % Plot the initial configuration of the workspace, obstacles, and robots
-    figure;
     plot(boundaryX, boundaryY, 'b-', 'LineWidth', 2); % Plot boundary
     hold on;
-    
     % Plot known obstacles in orange
     for j = 1:size(knownObstacleCenters, 1)
         viscircles(knownObstacleCenters(j, :), knownObstacleRadii(j), 'Color', [1, 0.5, 0]); % Orange color for known obstacles
@@ -25,5 +23,4 @@ function plot_initial_setup(boundaryX, boundaryY, knownObstacleCenters, knownObs
     title('Initial Robot Positions within Workspace');
     axis equal;
     grid on;
-    hold off;
 end

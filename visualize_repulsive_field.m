@@ -1,7 +1,6 @@
 %% Visualize Repulsive Field Function
 function visualize_repulsive_field(X, Y, repulsive_field)
     % Function to visualize the repulsive field as a surface plot
-    figure;
     surf(X, Y, repulsive_field, 'EdgeColor', 'none'); % Surface plot of the repulsive field
     colorbar;
     xlabel('X');
