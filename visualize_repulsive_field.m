@@ -7,6 +7,7 @@ function visualize_repulsive_field(X, Y, repulsive_field)
     xlabel('X');
     ylabel('Y');
     zlabel('Repulsive Field Intensity');
-    title('Visualization of the Combined Obstacle and Boundary Repulsive Field');
+    title('Visualization of the Obstacle Repulsive Field');
     view(3); % Set to 3D view for better visualization of field intensity
+    datacursormode on;
 end

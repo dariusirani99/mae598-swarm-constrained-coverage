@@ -5,7 +5,6 @@ function [xPos, yPos, direction_angle] = apply_boundary_reflection(xPos, yPos, b
     [min_dist, closest_idx] = min(distances_to_boundary);
 
     if min_dist < sensing_radius
-        disp("LESS THAN!! REFLECT!!");
 
         % Get the closest boundary point
         closest_boundary_x = boundaryX(closest_idx);

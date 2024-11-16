@@ -57,4 +57,5 @@ function [boundaryX, boundaryY, knownObstacleCenters, knownObstacleRadii, unknow
         % Lock circle interaction to prevent further modification
         h_circle.InteractionsAllowed = 'none';
     end
+    close()
 end
