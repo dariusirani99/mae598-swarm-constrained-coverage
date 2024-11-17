@@ -27,7 +27,7 @@ function run_simulation(time_steps, robot_positions, nav_dx, nav_dy, x, y, bound
     grid on;
     hold on;
 
-    % Initialize plot for robot positions without trails
+    % robot positions initial plot
     h_robots = plot(robot_positions(:, 1), robot_positions(:, 2), 'go', 'MarkerSize', 8, 'MarkerFaceColor', 'g');
     hold on;
 

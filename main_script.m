@@ -10,9 +10,8 @@ numRobots = input('Enter the number of robots: ');
 %% USER TUNABLE VARIABLES
 % Defining robot states and switching probabilities
 p_leave_base = 0.10;  % Base probability of leaving a cluster
-sensing_radius = 1.5;
+sensing_radius = 1.5; % from robot below
 num_points_per_segment = 50;
-kappa = 3.5; % controls sharpness of nav
 robot_speed = 0.25; % Base speed of random movement should equal .25m/s (https://www.lotsofbots.com/en/l1000-versus-unmanned-ground-vehicle-ugv/)
 
 %% Get initial variables and states
@@ -37,10 +36,11 @@ xlabel('X');
 ylabel('Y');
 axis equal;
 
-%% Defining Functions
+%% Navigation Function (Obstacle repulsion)
 x = linspace(min(boundaryX), max(boundaryX), 200);
 y = linspace(min(boundaryY), max(boundaryY), 200);
 [X, Y] = meshgrid(x, y);
+kappa = 3.5; % controls sharpness of nav
 
 % Obstacle Repulsive Field
 beta_sphere = struct([]);
@@ -61,8 +61,7 @@ else
     end
 end
 
-%% Navigation Function (Obstacle repulsion)
-% Scale and threshold the navigation function
+% scale and threshold the navigation function
 nav = 1 ./ ((beta_prod) .^ (1 / kappa));
 
 % Step 1: Create a distance mask to limit the nav function to regions near known obstacles
@@ -102,7 +101,7 @@ for i = 1:length(knownObstacleRadii)
         distances_within_mask = sqrt(distances_squared(obstacle_mask));
         max_distance = knownObstacleRadii(i) + obstacle_radius/2;
         taper_factor = (max_distance - distances_within_mask) / max_distance;
-        taper_factor = max(taper_factor, 0); % Ensure taper_factor is non-negative
+        taper_factor = max(taper_factor, 0); % taper_factor is non-negative
         nav(obstacle_mask) = nav(obstacle_mask) .* taper_factor;
     end
 end

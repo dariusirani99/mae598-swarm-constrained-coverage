@@ -1,10 +1,9 @@
 %% Interpolate boundary points
 function [interpBoundaryX, interpBoundaryY] = interpolate_boundary(boundaryX, boundaryY, num_points_per_segment)
-    % Initialize arrays for interpolated boundary points
+    % arrays for interpolated boundary points
     interpBoundaryX = [];
     interpBoundaryY = [];
 
-    % Loop through each pair of consecutive boundary points
     for i = 1:length(boundaryX) - 1
         % Get the start and end points of the segment
         x_start = boundaryX(i);
