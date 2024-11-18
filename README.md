@@ -14,13 +14,6 @@ To download the repository:
 2. **Extract the ZIP to a location on your device**
 
 
-3. **Pull Data into the Repository**
-
-   - Use the following command to pull data using DVC:
-     ```
-     dvc pull <.dvc file name>
-     ```
-
 # Running the simulation
 
 To run the simulation:
