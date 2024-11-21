@@ -1,30 +1,27 @@
-# General
+# Constrained Coverage Mapping Simulation
 
-- This repository is for running the constrained-coverage-mapping script for MAE598 - Multi Robot Systems
-- Please credit Darius Irani if used anywhere
-- It requires MATLAB with the IMAGE PROCESSING TOOLBOX
+## General
+This repository contains scripts for the MAE598 - Multi Robot Systems project. It simulates swarm robotics for constrained coverage mapping, including obstacle detection and avoidance.
 
-# Downloading the Repository
+**Please credit Darius Irani if used in any publications or projects.**
 
-To download the repository:
+## Requirements
+- MATLAB R2021a or later
+- Image Processing Toolbox
 
-1. **Click on "Code" and download the ZIP**
+## Downloading the Repository
+1. Click on **Code** and select **Download ZIP**.
+2. Extract the ZIP file to your desired location.
 
+## Running the Simulation
+1. Ensure all files are stored in the same folder.
+2. Open the `main_script.m` file in MATLAB.
+3. Adjust parameters in the **USER TUNABLE VARIABLES** section.
+4. Run the script and follow the prompts in the MATLAB console.
 
-2. **Extract the ZIP to a location on your device**
+## Troubleshooting
+- Ensure the Image Processing Toolbox is installed and active.
+- If errors occur, confirm that all files are in the same directory and MATLAB has appropriate permissions.
 
-
-# Running the simulation
-
-To run the simulation:
-
-1. **Ensure all files are stored in the same folder**
-
-
-2. **Open the "main_script.m" MATLAB File**
-
-
-3. **Adjust any desired parameters in the USER TUNABLE VARIABLES section**
-
-
-4. **Run the script and follow the prompted directions in the console**
+## License
+This work is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
