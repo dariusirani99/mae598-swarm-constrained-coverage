@@ -1,4 +1,4 @@
-# Constrained Coverage Mapping Simulation
+# Constrained Obstacle Detection
 
 # Copyright Notice
 
